@@ -5,7 +5,22 @@ project(
     default_options: ['warning_level=3', 'cpp_std=c++17'],
 )
 
-incs = [include_directories('../src')]
+srcs = run_command('find', '../src', '-name', '*.cpp', check: true).stdout().splitlines()
+
+incs = run_command(
+    'find',
+    '../src',
+    '-path', '../src/builddir',
+    '-prune',
+    '-o',
+    '-type', 'd',
+    '-print',
+    check: true,
+).stdout().splitlines()
+foreach inc : incs
+    message(inc)
+endforeach
+
 deps = [dependency('gtest', required: true), dependency('gmock', required: true)]
 
 # サブディレクトリをまとめてビルド
