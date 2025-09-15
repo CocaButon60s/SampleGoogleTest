@@ -12,7 +12,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 ln -fs /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 EOF
 
-RUN apt-get install -y sudo wget cmake ninja-build build-essential pkg-config meson
+RUN apt-get install -y sudo wget cmake ninja-build build-essential pkg-config meson nlohmann-json3-dev
 
 WORKDIR /root
 RUN <<EOF
